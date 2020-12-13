@@ -56,7 +56,6 @@ class ConstatController extends Controller
         $dommages_phase_2= Dommage::where('idRemorque',$remorque['id_remorque'])->where('etat','phase2')->get();
 
 
-
        // $liste_dommages= Dommage::where('idRemorque',$remorque['id_remorque'])->orderBy('id_dommage', 'asc')->get();
 
        $liste_dommages=array();

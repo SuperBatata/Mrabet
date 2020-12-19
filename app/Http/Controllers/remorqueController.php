@@ -46,7 +46,7 @@ class remorqueController extends Controller
             })
             ->addColumn('Preview_Constat',function($row)
             {
-                $btn='<td><a href="'.action('ConstatController@show',$row->id_remorque).'" target="_blank"" >Click to preview  pdf </a>';
+                $btn='<a href="'.action('ConstatController@show',$row->id_remorque).'" target="_blank"" >Click to preview  pdf </a>';
                 return $btn;
             })
             ->addColumn('Download_Constat',function($row)
@@ -54,7 +54,12 @@ class remorqueController extends Controller
                 $btn='<a href="'.action('ConstatController@download',$row->id_remorque).'" target="_blank"" >Click to download  pdf </a>';
                 return $btn;
             })
-            ->rawColumns(['Edit','Delete','Preview_Constat','Download_Constat'])
+            ->addColumn('Liste_Dommages',function($row)
+            {
+                $btn='<a href="'.action('RemorqueController@showDamages',$row->id_remorque).'">Voir Dommages</a>';
+                return $btn;
+            })
+            ->rawColumns(['Edit','Delete','Preview_Constat','Download_Constat','Liste_Dommages'])
             ->make(true);
 
         }
@@ -333,6 +338,37 @@ class remorqueController extends Controller
                     break;
             }
 
+    }
+
+    public function showDamages($id_remorque)
+    {
+
+
+            $dommages=Remorque::find($id_remorque)->dommages;
+
+
+        if (request()->ajax())
+        {
+
+            return DataTables::of($dommages)
+            ->addColumn('Delete',function($row)
+            {
+                $btn='
+                <form   action="'.action('DommageController@deleteDommage').'" method="POST"}}>
+                '.csrf_field().'
+                <input type="hidden" name="id_dommage" value="'.$row->id_dommage.'"/>
+                <button type="Submit"  class="btn btn-danger btn-primary">Delete
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                </form>
+                  ';
+                return $btn;
+            })
+            ->rawColumns(['Delete'])
+            ->make(true);
+
+
+     }
+     return  view ('Dommages.DommagesRemorques',compact('dommages','id_remorque'));
     }
 
 

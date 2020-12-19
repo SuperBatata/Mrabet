@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
+use PhpParser\Node\Stmt\Echo_;
 
 class DommageController extends Controller
 {
@@ -24,7 +25,7 @@ class DommageController extends Controller
         return view('users.listDommages',compact('Dommages','etat','id_remorque','idVoyage'));
         //return view('users.listDommages',compact('Dommages','id_remorque'));
     }
-    public function store (Request $request ,$id_remorque){
+  /*  public function store (Request $request ,$id_remorque){
 
 
         $this->validate( $request  ,[
@@ -78,29 +79,86 @@ class DommageController extends Controller
             $post->dommageImage = $filePath .'\\' . $name ;
 
         }
-      
+
         $find = \App\Remorque::find($id_remorque);
         $idVoyage= $find->voyage_id;
         switch ($request->input('action')) {
             case 'add':
-        
+
                 $post->save();
-             
+
                 return redirect()->route('cDommagephase1', [ $id_remorque])->with("success","Remorque ajouté");
-                break;  
+                break;
             case 'dda':
-        
+
                     $post->save();
-                 
+
                     return redirect()->route('cDommagephase2', [ $id_remorque])->with("success","Remorque ajouté");
-                    break;  
-    
+                    break;
+
             case 'submit':
                 $post->save();
                 return view('users.listeRemorques',compact('etat','idVoyage'))->with("success","Remorque ajouté");
                 break;
         }
-   
+
+    }*/
+
+
+    public function store(Request $request)
+    {
+        $this->validate( $request  ,[
+            'indentification' =>'required',
+            'plomb' =>'required',
+            'Detail' =>'required',
+            'Dommage_Name' =>'required',
+            'Type' =>'required',
+            'Dommage' =>'required',
+            'Largeur' =>'required',
+            'Unite' =>'required',
+            'Anciennete' =>'required',
+            'Position' =>'required',
+            'Longeur' =>'required',
+            ]);
+            //create Post
+            $remorque = \App\Remorque::find($request->input('id_remorque'));
+
+            $dommage = new Dommage();
+            $dommage->etat= $remorque->phase;
+            $dommage->remorque()->associate($remorque);
+            $dommage->indentification = $request->input('indentification');
+            $dommage->Plomb = $request->input('plomb');
+            $dommage->DommageName = $request->input('Dommage_Name');
+            $dommage->Type = $request->input('Type');
+            $dommage->Anciennete = $request->input('Anciennete');
+            $dommage->Position = $request->input('Position');
+            $dommage->Unite = $request->input('Unite');
+            $dommage->Longeur = $request->input('Longeur');
+            $dommage->Largeur = $request->input('Largeur');
+            $dommage->Dommage = $request->input('Dommage');
+            $dommage->Detail = $request->input('Detail');
+            if ($request->has('dommageImage')) {
+                // Get image file
+
+                $image = $request->file('dommageImage');
+                // Make a image name based on user name and current timestamp
+                $name =time().'_'. $image->getClientOriginalName();
+                // Define folder path
+                // $folder = '/uploads/images/';
+                // Make a file path where image will be stored [ folder path + file name + file extension]
+                //$filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+                $filePath = public_path('dommageImage');
+                // Upload image
+                //$this->uploadone($image, $folder, 'public', $name);
+                // Set user profile image path in database to filePath
+                $request->file('dommageImage')->move($filePath, $name);
+                $dommage->dommageImage = $filePath .'\\' . $name ;
+
+            }
+            $dommage->save();
+
+            return redirect()->route('listeDommages',[$request->input('id_remorque')])->with('success','dommage ajouté avec succès');
+
     }
     public function editDommage ($id_dommage)
     {
@@ -117,7 +175,7 @@ class DommageController extends Controller
             'Dommage_Name' =>'required',
             'Type' =>'required',
             'Dommage' =>'required',
-            'Largeur' =>'required',
+            'Largeur' => 'required',
             'Unite' =>'required',
             'Anciennete' =>'required',
             'Position' =>'required',
@@ -154,19 +212,19 @@ class DommageController extends Controller
 
             }
             $id_remorque=$post->idRemorque;
-          
+
             $post->save();
             return redirect()->route('DList', [$id_remorque])->with("success","dommage modifié");
 
     }
-    public function deleteDommage(Request $request, $id_dommage)
+    /*public function deleteDommage(Request $request, $id_dommage)
 
     {
         $post = Dommage::find($id_dommage);
         $id_remorque=$post->idRemorque;
         $post->delete();
         return redirect()->route('DList', [$id_remorque])->with("success","dommage suprimé");
-    }
+    }*/
     public function validerTache ( $id_remorque)
 
     {
@@ -174,7 +232,8 @@ class DommageController extends Controller
         $idVoyage = $post->voyage_id;
         $Remorques = Remorque::where('voyage_id',$idVoyage)->get();
         return   redirect()->route('Rlist', [$idVoyage])->with("success","contenaire valider");}
-    public function postView1($id_remorque)
+
+        public function postView1($id_remorque)
     {
   $Dommages= \App\Dommage::all();
   $remorque = \App\Remorque::find($id_remorque);
@@ -192,5 +251,24 @@ class DommageController extends Controller
     }
   }
 
+  public function saisieDommage($id_remorque)
+  {
+
+
+    $remorque = \App\Remorque::find($id_remorque);
+    $idVoyage= $remorque->voyage_id;
+    $voyage= voyage::find($idVoyage);
+    $phase= $voyage->etat;
+    return view('Dommages.SaisieDommage',compact('remorque','id_remorque'));
+  }
+
+  public function deleteDommage(Request $request)
+  {
+
+    $dommage=Dommage::find($request->input('id_dommage'));
+    $dommage->delete();
+    return redirect()->back()->with('success','dommage supprimé avec succès');
+  }
+
+
 }
-    

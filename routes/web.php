@@ -21,7 +21,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::resource('/edit','UsersController',[]);
 });
 Route::get('cRemorque/{idVoyage}', 'TacheController@fairePhase1')->name('fPhase1');
-Route::post('chargement/{id_remorque}', 'DommageController@store');
+Route::post('chargement', 'DommageController@store');
 
 Route::get('vtache', 'TacheController@index')->name('vtache');
 Route::get('vtache_phase2', 'TacheController@datatable_phase2')->name('vtache_phase2');
@@ -46,7 +46,7 @@ Route::get('deleteRemorque/{id_remorque}','remorqueController@deleteRemorque');
 Route::get('validerTache/{id_remorque}','DommageController@validerTache');
 Route::get('editDommages/{Dommage_id}','DommageController@editDommage');
 Route::post('editDommages/{Dommage_id}', 'DommageController@updateDommage');
-Route::get('deleteDommages/{Dommage_id}','DommageController@deleteDommage');
+Route::post('deleteDommages','DommageController@deleteDommage')->name('deleteDommage');
 Route::get('cDommagephase1/{id_remorque}','remorqueController@cDommagephase1')->name('cDommagephase1');
 Route::get('cDommagephase2/{id_remorque}','remorqueController@cDommagephase2')->name('cDommagephase2');
 //<Route:get></Route:get>
@@ -75,4 +75,9 @@ Route::post('updateContainer','ContainerController@updateContainer')->name('upda
 Route::get('addChargeur','ChargeurController@addChargeur')->name('addChargeur');
 Route::post('saveChargeur','Auth\RegisterController@registerChargeur')->name('saveChargeur');
 /********************************************************************************************** */
+
+/**** Remorques Dommages View */
+Route::get('listeDommages/{id_remorque}','RemorqueController@showDamages')->name('listeDommages');
+Route::get('saisieDommage/{id_remorque}','DommageController@saisieDommage')->name('saisieDommage');
+
 

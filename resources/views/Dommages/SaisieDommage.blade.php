@@ -58,28 +58,30 @@
         </div>
       </nav>
       {{$id_remorque}}
-<form id="addDommage" action="{{action('DommageController@store',$id_remorque)}}" method="POST" >
+<form id="addDommage" action="{{action('DommageController@store')}}" method="POST" >
     <div class="alert alert-success d-none" id="msg_div">
         <span id="res_message">dommage enregistré</span>
    </div>
-    <input name="_token" type="hidden" value="pV1vWWdUqFDfYsBjKag43C3NvzbIC0lHtMnv9BpI">
+   @csrf
+   <input name="_token" type="hidden" value="pV1vWWdUqFDfYsBjKag43C3NvzbIC0lHtMnv9BpI">
+    <input name="id_remorque" type="hidden" value="{{$id_remorque}}">
         <div class="grid-2" style=" margin:4px 20px 4px 20px;background-color: #dcdcdc ;color:black ">
         <div class="grid" style="background-color:#a8e4a0;border-radius:7px ;">
             <label for="indentification" >indentification</label>
-            <input type="text" style="margin: 0;width:180px;" name="indentification" value='{{$remorque->identification}}' placeholder="enter indentification">
+            <input type="text" style="margin: 0;width:180px;" name="indentification" value='{{$remorque->identification}}' placeholder="enter indentification" readonly>
             @csrf
             @if ($errors->has('indentification'))
             <strong>{{ $errors->first('indentification') }}</strong>
             @endif
             <label for="plomb">plomb</label>
             @csrf
-            <input type="text" name="plomb" style="margin: 0;width:180px;" value='{{$remorque->plomb}}' placeholder="enter plomb ">
+            <input type="text" name="plomb" style="margin: 0;width:180px;" value='{{$remorque->plomb}}' placeholder="enter plomb " readonly>
             @if ($errors->has('Plomb'))
             <strong>{{ $errors->first('Plomb') }}</strong>
             @endif
             <label for="Type">Type</label>
             @csrf
-            <input type="text" name="Type" style="margin: 0 6px ;width:180px;" value='{{$remorque->type}}'  placeholder="enter Type ">
+            <input type="text" name="Type" style="margin: 0 6px ;width:180px;" value='{{$remorque->type}}'  placeholder="enter Type " readonly>
             @if ($errors->has('Type'))
             <strong>{{ $errors->first('Type') }}</strong>
             @endif
@@ -370,7 +372,7 @@
                         <input type="radio" class="form-check-input position-static" name="Dommage_Name" value="Toiture">Toiture
                     </div>
 
-                                @csrf
+
             </div>
 
 
@@ -580,14 +582,14 @@
        <div style="padding:0 10px 0 10px;background-color:#f5f5f5 ;margin:0px">
         <label for="Largeur">Largeur:</label>
         @csrf
-        <input type="text" style="border-radius:5px;" name="Largeur" placeholder="enter Largeur ">
+        <input type="number" style="border-radius:5px;" name="Largeur" placeholder="enter Largeur ">
         @if ($errors->has('Largeur'))
         <strong>{{ $errors->first('Largeur') }}</strong>
         @endif
         </div>
     <div style="padding:0 10px 0 10px;background-color:#f5f5f5 ;margin:0px">
 
-        <button name ='action' value="add" type="submit" style="background: linear-gradient(to right, #2196f3, #f44336);font-family:Gill Sans" class=" btn-lg mr-5">Add Dommage</button>
+
         <button name ='action' value=" submit" type="submit" style="background:#ffb300 ;;"  class="btn btn-lg ml-5"> Submit </button>
 
     </div>
@@ -612,7 +614,7 @@
 
            /* Submit form data using ajax*/
            $.ajax({
-              url: "{{action('DommageController@store',$id_remorque)}}",
+              url: "{{action('DommageController@store')}}",
               method: 'post',
               data: $('#addDommage').serialize(),
               success: function(response){
@@ -640,5 +642,6 @@
         });
         //-----------------
         </script>
+
 </body>
 </html>

@@ -24,6 +24,10 @@ class Remorque extends Model
          {
             return  $this->belongsTo('App\Chargeur','chargeur_id','chargeur_id');
          }
+         public function dommages()
+         {
+             return $this->hasMany('App\Dommage','idRemorque','id_remorque');
+         }
 
 
 

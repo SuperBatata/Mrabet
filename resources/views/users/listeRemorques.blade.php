@@ -25,10 +25,10 @@
 
 @if($etat=='phase1')
 
-<div class="container-fluid">
+<div class="container-fluid" >
     <div class="row">
         <div class="col">
-            <div class="card-header">phase1:liste Remorque </div>
+            <div class="card-header" style="background-color:purple">phase1:liste Remorque </div>
                 <table id="listeRemorques" class="table table-bordred table-striped">
 
                     <thead>
@@ -42,10 +42,12 @@
                         <th class="bg-danger">Vue3</th>
                         <th class="bg-danger">Vue4</th>
                         <th class="bg-danger">Scelle</th>
+                        <th class="bg-danger">Liste des Dommages</th>
                         <th class="bg-danger">Edit</th>
                         <th class="bg-danger">Delete</th>
                         <th class="bg-danger">Preview Constat</th>
                         <th class="bg-danger">Download Constat</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -53,11 +55,12 @@
                 </table>
         </div>
     </div>
+</div>
 
 
     <div class="row">
         <div class="col">
-            <div class="card-header">phase1:liste Containers </div>
+            <div class="card-header" style="background-color: blue">phase1:liste Containers </div>
             <table id="listContainer" class="table table-bordred table-striped">
 
                 <thead>
@@ -74,6 +77,7 @@
                 <th class="bg-primary">Dommage</th>
                 <th class="bg-primary">Detail</th>
                 <th class="bg-primary">Unite</th>
+                <th class="bg-primary">Liste des Dommages</th>
                     <th class="bg-primary">Edit</th>
                     <th class="bg-primary">Delete</th>
                     <th class="bg-primary">Preview Constat</th>
@@ -95,7 +99,7 @@
 @elseif($etat=='phase2')
 <div class="row justify-content-center">
     <div class="col-md-10">
-        <div class="card-header">phase2:liste Remorque </div>
+        <div class="card-header"style="background-color:purple ">phase2:liste Remorque </div>
         <div class="table-responsive">
             <table id="listeRemorques" class="table table-bordred table-striped">
                 <thead>
@@ -109,6 +113,7 @@
                     <th class="bg-danger">Vue3</th>
                     <th class="bg-danger">Vue4</th>
                     <th class="bg-danger">Scelle</th>
+                    <th class="bg-danger">Liste des Dommages</th>
                     <th class="bg-danger">Edit</th>
                     <th class="bg-danger">Delete</th>
                     <th class="bg-danger">Preview Constat</th>
@@ -124,15 +129,15 @@
 
     <div class="row">
         <div class="col">
-            <div class="card-header">phase2:liste Containers </div>
+            <div class="card-header" style="background-color: blue">phase2:liste Containers </div>
                 <table id="listContainer" class="table table-bordred table-striped">
 
                     <thead>
                         <tr>
-                        <th class="bg-danger">Type</th>
+                        <th class="bg-primary">Type</th>
                         <th class="bg-primary">Chargeur</th>
-                        <th class="bg-danger">Height</th>
-                        <th class="bg-danger">Length</th>
+                        <th class="bg-primary">Height</th>
+                        <th class="bg-primary">Length</th>
                     <th class="bg-primary">Identification</th>
                     <th class="bg-primary">Plomb</th>
                     <th class="bg-primary">DommageName</th>
@@ -141,10 +146,11 @@
                     <th class="bg-primary">Dommage</th>
                     <th class="bg-primary">Detail</th>
                     <th class="bg-primary">Unite</th>
-                        <th class="bg-danger">Edit</th>
-                        <th class="bg-danger">Delete</th>
-                        <th class="bg-danger">Preview Constat</th>
-                        <th class="bg-danger">Download Constat</th>
+                    <th class="bg-primary">Liste des Dommages</th>
+                        <th class="bg-primary">Edit</th>
+                        <th class="bg-primary">Delete</th>
+                        <th class="bg-primary">Preview Constat</th>
+                        <th class="bg-primary">Download Constat</th>
 
                     </tr>
                     </thead>
@@ -160,7 +166,7 @@
 @elseif($etat=='terminé')
 <div class="row justify-content-center">
     <div class="col-md-10">
-        <div class="card-header">liste Remorque </div>
+        <div class="card-header" style="background-color: purple">liste Remorque </div>
         <div class="table-responsive">
             <table id="listeRemorques" class="table table-bordred table-striped">
                 <thead>
@@ -174,6 +180,7 @@
                     <th class="bg-danger">Vue3</th>
                     <th class="bg-danger">Vue4</th>
                     <th class="bg-danger">Scelle</th>
+                    <th class="bg-danger">Liste des Dommages</th>
                     <th class="bg-danger">Edit</th>
                     <th class="bg-danger">Delete</th>
                     <th class="bg-danger">Preview Constat</th>
@@ -190,16 +197,16 @@
 
     <div class="row">
         <div class="col">
-            <div class="card-header">liste Containers </div>
+            <div class="card-header" style="background-color: blue">liste Containers </div>
             <div class="table-responsive">
-                <table id="listContainer" class="table table-bordred table-striped">
+                <table id="listContainer" class="table table-bordered table-striped">
 
                     <thead>
                         <tr>
-                        <th class="bg-danger">Type</th>
+                        <th class="bg-primary">Type</th>
                         <th class="bg-primary">Chargeur</th>
-                        <th class="bg-danger">Height</th>
-                        <th class="bg-danger">Length</th>
+                        <th class="bg-primary">Height</th>
+                        <th class="bg-primary">Length</th>
                     <th class="bg-primary">Identification</th>
                     <th class="bg-primary">Plomb</th>
                     <th class="bg-primary">DommageName</th>
@@ -208,10 +215,11 @@
                     <th class="bg-primary">Dommage</th>
                     <th class="bg-primary">Detail</th>
                     <th class="bg-primary">Unite</th>
-                        <th class="bg-danger">Edit</th>
-                        <th class="bg-danger">Delete</th>
-                        <th class="bg-danger">Preview Constat</th>
-                        <th class="bg-danger">Download Constat</th>
+                    <th class="bg-primary">Liste des Dommages</th>
+                        <th class="bg-primary">Edit</th>
+                        <th class="bg-primary">Delete</th>
+                        <th class="bg-primary">Preview Constat</th>
+                        <th class="bg-primary">Download Constat</th>
 
                     </tr>
                     </thead>
@@ -260,6 +268,7 @@ $(document).ready(function() {
             {data: 'vue3', name: 'vue3'},
             {data: 'vue4', name: 'vue4'},
             {data: 'SCELLE', name: 'SCELLE'},
+            {data: 'Liste_Dommages', name: 'Liste_Dommages'},
             {data: 'Edit', name: 'Edit'},
             {data: 'Delete', name: 'Delete'},
             {data: 'Preview_Constat', name: 'Preview_Constat'},
@@ -292,6 +301,7 @@ $(document).ready(function() {
                  {data: 'Dommage', name: 'Dommage'},
                  {data: 'Detail', name: 'Detail'},
                  {data: 'Unite', name: 'Unite'},
+                  {data: 'Liste_Dommages', name: 'Liste_Dommages'},
                  {data: 'Edit', name: 'Edit'},
                  {data: 'Delete', name: 'Delete'},
                  {data: 'Preview_Constat', name: 'Preview_Constat'},

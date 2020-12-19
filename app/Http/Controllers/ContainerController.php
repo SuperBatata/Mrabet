@@ -104,7 +104,12 @@ class ContainerController extends Controller
                 $btn='<a href="'.action('ConstatController@download',$row->id_container).'" target="_blank"" >Click to download  pdf </a>';
                 return $btn;
             })
-            ->rawColumns(['Edit','Delete','Preview_Constat','Download_Constat'])
+            ->addColumn('Liste_Dommages',function($row)
+            {
+                $btn='<a href="'.action('RemorqueController@showDamages',$row->id_container).'">Voir Dommages</a>';
+                return $btn;
+            })
+            ->rawColumns(['Edit','Delete','Preview_Constat','Download_Constat','Liste_Dommages'])
             ->make(true);
     }
 }

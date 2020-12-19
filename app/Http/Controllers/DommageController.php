@@ -27,7 +27,7 @@ class DommageController extends Controller
     }
   /*  public function store (Request $request ,$id_remorque){
 
-
+************Route became POST and cleaned the code a bit ,check the new function store   *******************
         $this->validate( $request  ,[
         'indentification' =>'required',
         'plomb' =>'required',
@@ -218,7 +218,7 @@ class DommageController extends Controller
 
     }
     /*public function deleteDommage(Request $request, $id_dommage)
-
+        *******replaced by deleteDommage ************
     {
         $post = Dommage::find($id_dommage);
         $id_remorque=$post->idRemorque;
@@ -253,12 +253,7 @@ class DommageController extends Controller
 
   public function saisieDommage($id_remorque)
   {
-
-
     $remorque = \App\Remorque::find($id_remorque);
-    $idVoyage= $remorque->voyage_id;
-    $voyage= voyage::find($idVoyage);
-    $phase= $voyage->etat;
     return view('Dommages.SaisieDommage',compact('remorque','id_remorque'));
   }
 

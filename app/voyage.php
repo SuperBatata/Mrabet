@@ -22,4 +22,8 @@ class voyage extends Model
          {
              return $this->hasMany('App\Container','id_voyage','idVoyage');
          }
+         public function remorques()
+         {
+             return $this->hasMany('App\Remorque','voyage_id','idVoyage');
+         }
 }

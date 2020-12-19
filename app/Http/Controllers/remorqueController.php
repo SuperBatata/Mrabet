@@ -234,6 +234,12 @@ class remorqueController extends Controller
         if ($voyage->etat == 'phase1'){
             $voyage->etat = 'phase2';
             $voyage->save();
+
+            foreach($voyage->remorques as $remorque )
+            {
+                $remorque->phase='phase2';
+                $remorque->save();
+            }
         }
         else{
             $voyage->etat = 'terminé';

@@ -210,7 +210,7 @@ class remorqueController extends Controller
         $find =\App\voyage::find($idVoyage);
         $etat = $find->etat;
         $Remorques = Remorque::where('voyage_id',$idVoyage)->get();
-
+        $post->dommages()->delete();
      $post->delete();
         return   redirect()->route('Rlist', [$idVoyage])->with("success","Remorque suprimée");
    }

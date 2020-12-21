@@ -28,7 +28,7 @@ class Container extends Model
   {
      return  $this->belongsTo('App\voyage','idVoyage','id_voyage');
   }
-  public function Dommage ()
+  public function dommages ()
   {
       return $this->hasMany('App\Dommage','id_container','id_container');
   }

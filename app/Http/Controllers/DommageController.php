@@ -157,7 +157,7 @@ class DommageController extends Controller
             }
             $dommage->save();
 
-            return redirect()->route('listeDommages',[$request->input('id_remorque')])->with('success','dommage ajouté avec succès');
+            return redirect()->route('listeDommagesRemorque',[$request->input('id_remorque')])->with('success','dommage ajouté avec succès');
 
     }
     public function editDommage ($id_dommage)

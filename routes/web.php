@@ -77,7 +77,9 @@ Route::post('saveChargeur','Auth\RegisterController@registerChargeur')->name('sa
 /********************************************************************************************** */
 
 /**** Remorques Dommages View */
-Route::get('listeDommages/{id_remorque}','RemorqueController@showDamages')->name('listeDommages');
+Route::get('listeDommagesRemorque/{id_remorque}','RemorqueController@showDamages')->name('listeDommagesRemorque');
 Route::get('saisieDommage/{id_remorque}','DommageController@saisieDommage')->name('saisieDommage');
 
+/****Container Dommages */
+Route::get('listeDommagesContainer/{id_container}','ContainerController@showDamages')->name('listeDommagesContainer');
 

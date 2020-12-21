@@ -106,7 +106,7 @@ class ContainerController extends Controller
             })
             ->addColumn('Liste_Dommages',function($row)
             {
-                $btn='<a href="'.action('RemorqueController@showDamages',$row->id_container).'">Voir Dommages</a>';
+                $btn='<a href="'.action('ContainerController@showDamages',$row->id_container).'">Voir Dommages</a>';
                 return $btn;
             })
             ->rawColumns(['Edit','Delete','Preview_Constat','Download_Constat','Liste_Dommages'])
@@ -172,6 +172,43 @@ public function updateContainer (Request $request)
 
 
 }
+
+
+
+
+public function showDamages($id_container)
+    {
+
+
+            $dommages=Container::find($id_container)->dommages;
+
+
+        if (request()->ajax())
+        {
+
+            return DataTables::of($dommages)
+            ->addColumn('Delete',function($row)
+            {
+                $btn='
+                <form   action="'.action('DommageController@deleteDommage').'" method="POST"}}>
+                '.csrf_field().'
+                <input type="hidden" name="id_dommage" value="'.$row->id_dommage.'"/>
+                <button type="Submit"  class="btn btn-danger btn-primary">Delete
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                </form>
+                  ';
+                return $btn;
+            })
+            ->rawColumns(['Delete'])
+            ->make(true);
+
+
+     }
+     return  view ('Dommages.DommagesContainer',compact('dommages','id_container'));
+    }
+
+
+
 
 
 }

@@ -31,6 +31,8 @@ class CreateDommagesTable extends Migration
             $table->bigInteger('Largeur');
             $table->string('dommageImage')->nullable();
             $table->timestamps();
+            $table->integer('id_container')->nullable();
+            $table->foreign('id_container')->references('id_container')->on('containers');
         });
     }
 

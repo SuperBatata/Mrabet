@@ -359,22 +359,24 @@ class remorqueController extends Controller
             return DataTables::of($dommages)
             ->addColumn('Delete',function($row)
             {
-                $btn='
+                if ( !($row->remorque->phase=="phase2" && $row->etat=="phase1") )
+                {$btn='
                 <form   action="'.action('DommageController@deleteDommage').'" method="POST"}}>
                 '.csrf_field().'
                 <input type="hidden" name="id_dommage" value="'.$row->id_dommage.'"/>
-                <button type="Submit"  class="btn btn-danger btn-primary">Delete
+                <button type="Submit"  class="btn btn-lg" style="background-color:transparent;outline:none"> <i class="fa fa-trash" aria-hidden="true" style="color:crimson"></i>
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                 </form>
                   ';
-                return $btn;
+                return $btn;}
+
             })
             ->rawColumns(['Delete'])
             ->make(true);
 
 
      }
-     return  view ('Dommages.DommagesRemorques',compact('dommages','id_remorque'));
+     return  view ('Dommages.DommagesRemorque',compact('dommages','id_remorque'));
     }
 
 

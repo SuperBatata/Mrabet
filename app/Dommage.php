@@ -28,4 +28,9 @@ class Dommage extends Model
          {
              return $this->belongsTo('App\Remorque','idRemorque','id_remorque');
          }
+
+         public function container()
+         {
+             return $this->belongsTo('App\Container','id_container','id_container');
+         }
 }

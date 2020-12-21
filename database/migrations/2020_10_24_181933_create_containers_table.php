@@ -31,6 +31,7 @@ class CreateContainersTable extends Migration
             $table->string('Detail');
 
 
+
             $table->timestamps();
 
             $table->integer('id_voyage');

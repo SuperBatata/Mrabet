@@ -65,19 +65,23 @@ class ConstatController extends Controller
 
        while (count($dommages_phase_1) || count($dommages_phase_2))
         {
-            if (   $flag && count($dommages_phase_1))
-
+            if (   $flag )
                 {
-                        array_push($liste_dommages,$dommages_phase_1->shift());
-                        $flag=!$flag;
+                    if (count($dommages_phase_1))
+                    array_push($liste_dommages,$dommages_phase_1->shift());
+                    $flag=!$flag;
                }
-            else  if( !$flag && !count($dommages_phase_2))
+              if( !$flag )
             {
+                if (count($dommages_phase_2))
                  array_push($liste_dommages,$dommages_phase_2->shift());
                 $flag=!$flag;
+
             }
 
         ;}
+
+
 
        $voyage=voyage::where('idVoyage',$remorque['voyage_id'])->first();
 
@@ -101,23 +105,23 @@ class ConstatController extends Controller
          $flag=true;
 
 
-        while (count($dommages_phase_1) || count($dommages_phase_2))
-         {
-             if (   $flag && count($dommages_phase_1))
+         while (count($dommages_phase_1) || count($dommages_phase_2))
+        {
+            if (   $flag )
+                {
+                    if (count($dommages_phase_1))
+                    array_push($liste_dommages,$dommages_phase_1->shift());
+                    $flag=!$flag;
+               }
+              if( !$flag )
+            {
+                if (count($dommages_phase_2))
+                 array_push($liste_dommages,$dommages_phase_2->shift());
+                $flag=!$flag;
 
-                 {
-                         array_push($liste_dommages,$dommages_phase_1->shift());
-                         $flag=!$flag;
-                }
-             else  if( !$flag && !count($dommages_phase_2))
-             {
-                  array_push($liste_dommages,$dommages_phase_2->shift());
-                 $flag=!$flag;
-             }
+            }
 
-         ;}
-
-
+        ;}
 
 
          $voyage=voyage::where('idVoyage',$remorque['voyage_id'])->first();
